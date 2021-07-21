@@ -1,0 +1,33 @@
+{
+  "name": "practiseproject",
+  "version": "1.0.0",
+  "description": "Tracking service for regular sport activities",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vladyslav",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "lsof": "^0.1.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "node": "^16.4.0",
+    "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^5.22.4",
+    "sequelize-cli": "^6.2.0",
+    "typeorm": "^0.2.34"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.9"
+  }
+}
