@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -20,6 +20,7 @@ import {MatCardModule} from "@angular/material/card";
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {TokenInterceptor} from "./classes/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatCardModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

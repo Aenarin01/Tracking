@@ -68,6 +68,7 @@ body {
 
 .mat-button {
   width: 100%;
+  padding: 5px;
 }
 
 mat-sidenav mat-icon {

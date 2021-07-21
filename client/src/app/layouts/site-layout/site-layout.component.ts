@@ -1,5 +1,7 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-site-layout',
@@ -7,7 +9,9 @@ import {MatSidenav} from "@angular/material/sidenav";
   styleUrls: ['./site-layout.component.css']
 })
 export class SiteLayoutComponent implements OnInit {
-
+constructor(private auth: AuthService,
+            private router: Router) {
+}
   opened = true;
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav | undefined;
 
@@ -44,6 +48,12 @@ export class SiteLayoutComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  logout(event: Event) {
+    event.preventDefault()
+    this.auth.logout()
+    this.router.navigate(['/login'])
   }
 
 }

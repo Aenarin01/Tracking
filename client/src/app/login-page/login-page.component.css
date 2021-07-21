@@ -15,9 +15,9 @@ mat-card{
   height: 70px;
   padding-bottom: 10px;
   margin-bottom: 40px;
-  background-color: #19BD9B;
+  background-color: #6900FF;
   display: inline-block;
-  box-shadow: 0px 20px 20px  rgba(45, 153, 117, .2);
+  box-shadow: 0px 20px 20px  rgba(105, 0, 255, .2);
   border-radius: 40px 40px 150% 150%;
   z-index: 10;
   position: relative;
@@ -38,7 +38,7 @@ mat-card-content {
 }
 
 mat-card-title{
-  color: #19BD9B;
+  color: #6900FF;
 }
 
 .error {
@@ -53,6 +53,7 @@ mat-card-title{
   justify-content: center;
   text-align: center;
   width: 100%;
+  margin: 5px 0;
 }
 
 /*.button {*/
@@ -72,11 +73,21 @@ mat-card-title{
 
 .btn-fgtpas{
   color: firebrick;
-  width: 150px;
+  /*width: 150px;*/
   background-color: aliceblue;
+  text-align: right;
+  bottom: 6px;
+  left: 10px;
+}
+
+.btn-login{
+  background-color: #6900FF;
+  color: aliceblue;
+  margin: 5px 0;
 }
 
 .forget{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }

@@ -8,6 +8,7 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {AuthLayoutsComponent} from "./layouts/auth-layouts/auth-layouts.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {SiteLayoutComponent} from "./layouts/site-layout/site-layout.component";
+import {AuthGuard} from "./classes/auth.guard";
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: SiteLayoutComponent, canActivate: [
+    path: '', component: SiteLayoutComponent, canActivate:[AuthGuard], children: [
       {path: 'users', component: UsersDisplayComponent},
       {path: 'users/:id', component: UserInfoComponent},
       {path: 'add', component: AddUserComponent}
