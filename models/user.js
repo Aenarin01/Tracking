@@ -11,6 +11,16 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        role: {
+            type: Sequelize.STRING,
+            defaultValue: 'basic',
+            enum: ["basic", "supervisor","admin"]
+        },
+        accessToken: {
+            type: Sequelize.STRING
         }
-    });
+    },{ timestamps: false });
+
 };
+

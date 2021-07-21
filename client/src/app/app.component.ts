@@ -1,25 +1,49 @@
-import {Component} from '@angular/core';
-import {HelloService} from "./services/hello.service";
+
+import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [HelloService]
+  templateUrl: './app.component.html'
 })
+
 export class AppComponent {
+  opened = true;
+  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav | undefined;
 
-  helloMessage: string | any;
-  done: boolean = false;
-
-  constructor(private helloService: HelloService) {}
-
-  ngOnInit(){
-    this.helloService.getName().subscribe((data: any) => {
-      this.helloMessage = data.result;
-      this.done = true;
-    });
+  ngOnInit() {
+    console.log(window.innerWidth)
+    if (window.innerWidth < 768) {
+      // @ts-ignore
+      this.sidenav.fixedTopGap = 55;
+      this.opened = false;
+    } else {
+      // @ts-ignore
+      this.sidenav.fixedTopGap = 55;
+      this.opened = true;
+    }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    if (event.target.innerWidth < 768) {
+      // @ts-ignore
+      this.sidenav.fixedTopGap = 55;
+      this.opened = false;
+    } else {
+      // @ts-ignore
+      this.sidenav.fixedTopGap = 55
+      this.opened = true;
+    }
+  }
 
+  isBiggerScreen() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width < 768) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
+

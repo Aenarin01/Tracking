@@ -1,18 +1,18 @@
 module.exports = app => {
-
+    const passport = require('passport')
     const user = require("../controllers/user.js");
     const router = require("express").Router();
 
 
-    router.post("/", user.create);
+    router.post("/", passport.authenticate('jwt', {session: false}), user.create);
 
-    router.get("/", user.findAll);
+    router.get("/", passport.authenticate('jwt', {session: false}), user.findAll);
 
-    router.get("/:id", user.findOne);
+    router.get("/:id", passport.authenticate('jwt', {session: false}), user.findOne);
 
-    router.put("/:id", user.update);
+    router.put("/:id", passport.authenticate('jwt', {session: false}), user.update);
 
-    router.delete("/:id", user.delete);
+    router.delete("/:id", passport.authenticate('jwt', {session: false}), user.delete);
 
     app.use('/api/user', router);
 }
