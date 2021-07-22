@@ -21,6 +21,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TokenInterceptor} from "./classes/token.interceptor";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -34,21 +35,22 @@ import {TokenInterceptor} from "./classes/token.interceptor";
     RegisterPageComponent,
     SiteLayoutComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    AngularMaterialModule,
-    MatCardModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatSliderModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        AngularMaterialModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatSortModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
   ],

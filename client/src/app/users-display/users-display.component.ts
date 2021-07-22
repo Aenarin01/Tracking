@@ -1,32 +1,32 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {User} from "../interfaces";
-
+import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
 @Component({
   selector: 'app-users-display',
   templateUrl: './users-display.component.html',
   styleUrls: ['./users-display.component.css']
 })
-export class UsersDisplayComponent implements OnInit {
 
-  users: User[]=[];
-  currentUser:User = {name: "", password: "", email: "",role: ""} ;
-  currentIndex = -1;
-  name = '';
+export class UsersDisplayComponent implements OnInit{
+
+  users: User[] = []
+  dataSource!: MatTableDataSource<User>;
+  displayedColumns = ['_id','name','email', 'role','actions'];
 
   constructor(private userService: UserService) {
   }
 
-  ngOnInit(): void {
-    this.retrieveUsers();
+  ngOnInit() {
+    this.retrieveUsers()
   }
 
   retrieveUsers(): void {
     this.userService.getAll()
       .subscribe(
         data => {
-          this.users = data;
-          console.log(data);
+          this.dataSource = new MatTableDataSource(data);
         },
         error => {
           console.log(error);
@@ -34,16 +34,25 @@ export class UsersDisplayComponent implements OnInit {
       );
   }
 
-  refreshList(): void {
-    this.retrieveUsers();
-    this.currentUser = {email: "", name: "", password: "",role: ""};
-    this.currentIndex = -1;
+
+  addData() {
+
   }
 
-  setActiveTUser(user: User, index: number): void {
+  addNew() {
 
-    this.currentUser = user;
-    this.currentIndex = index;
   }
 
+  startEdit() {
+
+  }
+
+  deleteItem() {
+
+  }
+
+  refresh() {
+
+  }
 }
+

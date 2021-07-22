@@ -7,8 +7,6 @@ import {MatSidenav} from "@angular/material/sidenav";
   styleUrls: ['./auth-layouts.component.css']
 })
 export class AuthLayoutsComponent implements OnInit {
-  opened = true
-  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav | undefined;
   constructor() { }
 
   ngOnInit() {
