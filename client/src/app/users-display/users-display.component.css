@@ -1,13 +1,12 @@
 .demo-button-container {
-  padding-bottom: 16px;
-  text-align: right;
+  float: right;
+  margin-top: 50px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
 }
-
 
 .spacer {
   flex: 1 1 auto;
@@ -37,6 +36,10 @@
   padding: 14px;
   font-size: 14px;
   font-style: italic;
+}
+
+.tableUSer{
+
 }
 
 .mat-cell:nth-child(1),

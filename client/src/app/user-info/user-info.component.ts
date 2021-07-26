@@ -52,7 +52,7 @@ export class UserInfoComponent implements OnInit {
   deleteUser(): void {
     // @ts-ignore
     this.userService.delete(this.currentUser.id)
-      .subscribe(
+        .subscribe(
         response => {
           console.log(response);
           this.router.navigate(['/users']);

@@ -20,6 +20,8 @@ const routes: Routes = [
   },
   {
     path: '', component: SiteLayoutComponent, canActivate:[AuthGuard], children: [
+      {path: '', redirectTo: '/main', pathMatch: 'full'},
+      {path: 'main', component: MainPageComponent},
       {path: 'users', component: UsersDisplayComponent},
       {path: 'users/:id', component: UserInfoComponent},
       {path: 'add', component: AddUserComponent}

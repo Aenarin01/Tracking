@@ -1,53 +1,129 @@
-<button mat-icon-button color="blue" (click)="ChangeMode()"></button>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="_id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-  </ng-container>
+<mat-form-field appearance="standard">
+  <mat-icon aria-label="Search">search</mat-icon>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+</mat-form-field>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let user"> {{user.name}} </td>
-  </ng-container>
+  <button mat-icon-button color="primary"  class="demo-button-container" (click)="addNew()">
+    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+  </button>
 
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let user"> {{user.email}} </td>
-  </ng-container>
+<div class="table-responsive">
 
-  <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
-    <td mat-cell *matCellDef="let user">
-     <div *ngIf="!isEditMode">
-       <mat-form-field color="warn" appearance="outline">
-         <mat-label>User Role</mat-label>
-         <mat-select [(ngModel)]="user.role">
-           <mat-option *ngFor="let role of displayedRoles" [value]="role">
-             {{role}}
-           </mat-option>
-         </mat-select>
-       </mat-form-field>
-     </div>
-      <div *ngIf="isEditMode">
-        <span>{{user.role}}</span>
-      </div>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>
-      <button mat-icon-button color="primary" (click)="addNew()">
-        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-      </button>
-    </mat-header-cell>
 
-    <mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button color="blue" (click)="deleteItem()">
-        <mat-icon aria-label="Delete">delete</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tableUser" matSort>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> <h3><strong>ID</strong></h3></th>
+      <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef><h3><strong>Name</strong></h3></th>
+      <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> <h3><strong>Email</strong></h3></th>
+      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> <h3><strong>Role</strong></h3></th>
+      <td mat-cell *matCellDef="let user">
+        <div *ngIf="!isEditMode">
+          <span>{{user.role}}</span>
+        </div>
+        <div *ngIf="isEditMode">
+          <mat-form-field color="warn" appearance="outline">
+            <mat-label>User Role</mat-label>
+            <mat-select [(ngModel)]="user.role">
+              <mat-option *ngFor="let role of displayedRoles" [value]="role">
+                {{role}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> <h3><strong>Actions</strong></h3></th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button color="blue" (click)="deleteItem(user.id)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+        <button mat-icon-button color="blue" (click)="editUser(user.id)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;  columns: displayedColumns;" (dblclick)="ChangeMode()"></tr>
+  </table>
+
+  <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
+  </mat-paginator>
+</div>
+
+<!--<div class="table-wrapper">-->
+
+<!--  <form (submit)="onSubmit()" #userForm="ngForm">-->
+
+<!--    <mat-form-field>-->
+<!--      <input matInput placeholder="Name" name="name" required [(ngModel)]="currentUser.name">-->
+<!--    </mat-form-field>-->
+<!--    <mat-form-field>-->
+<!--      <input matInput placeholder="Email" name="email" required [(ngModel)]="currentUser.email">-->
+<!--    </mat-form-field>-->
+<!--    <mat-form-field>-->
+<!--      <input matInput placeholder="Role" name="role" required [(ngModel)]="currentUser.role">-->
+<!--    </mat-form-field>-->
+
+<!--    <ng-container *ngIf="isEditMode; else elseTemplate">-->
+<!--      <button mat-button color="primary">Update</button>-->
+<!--      <a mat-button color="warn" (click)="cancelEdit()">Cancel</a>-->
+<!--    </ng-container>-->
+<!--    <ng-template #elseTemplate>-->
+<!--      <button mat-button color="primary">Add</button>-->
+<!--    </ng-template>-->
+
+<!--  </form>-->
+
+<!--  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
+
+<!--    <ng-container matColumnDef="id">-->
+<!--      <th mat-header-cell *matHeaderCellDef> #Id </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.id}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="name">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Name </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="age">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Age </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.age}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="address">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Address </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.address}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="actions">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Actions </th>-->
+<!--      <td mat-cell *matCellDef="let element">-->
+<!--        <a href="javascript:void(0)" (click)="editUser(element)">Edit</a> |-->
+<!--        <a href="javascript:void(0)" (click)="deleteItem(element.id)">Delete</a>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"-->
+<!--        [ngClass]="{'editable-row': currentUser.id === row.id}"></tr>-->
+<!--  </table>-->
+<!--  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+<!--</div>-->

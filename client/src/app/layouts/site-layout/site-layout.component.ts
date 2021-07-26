@@ -9,45 +9,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./site-layout.component.css']
 })
 export class SiteLayoutComponent implements OnInit {
-constructor(private auth: AuthService,
-            private router: Router) {
-}
-  opened = true;
-  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav | undefined;
+   links = [
+    {url: '/add', name: 'Add'},
+    {url: '/users', name: 'Users'}
+  ];
+  constructor(private auth: AuthService,
+              private router: Router) {
+  }
+
 
   ngOnInit() {
-    console.log(window.innerWidth)
-    if (window.innerWidth < 768) {
-      // @ts-ignore
-      this.sidenav.fixedTopGap = 55;
-      this.opened = false;
-    } else {
-      // @ts-ignore
-      this.sidenav.fixedTopGap = 55;
-      this.opened = true;
-    }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: { target: { innerWidth: number; }; }) {
-    if (event.target.innerWidth < 768) {
-      // @ts-ignore
-      this.sidenav.fixedTopGap = 55;
-      this.opened = false;
-    } else {
-      // @ts-ignore
-      this.sidenav.fixedTopGap = 55
-      this.opened = true;
-    }
-  }
-
-  isBiggerScreen() {
-    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (width < 768) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   logout(event: Event) {
