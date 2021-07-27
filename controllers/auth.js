@@ -7,10 +7,14 @@ const errorHandler = require('../utils/errorHandler')
 
 
 module.exports.login = async function (req, res) {
+    if (req.body.email.length === 0) {
+        res.status(404).json({
+            message: 'Пользователь с таким email не найден.'
+        })
+    }
     const candidate = await User.findOne({where: {email: req.body.email}})
-
     if (candidate) {
-        const passwordResult = bcrypt.compare(req.body.password, candidate.password);
+        const passwordResult = await bcrypt.compare(req.body.password, candidate.password);
         if (passwordResult) {
             const token = jwt.sign({
                 email: candidate.email,

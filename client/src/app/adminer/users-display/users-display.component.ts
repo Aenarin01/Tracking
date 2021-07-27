@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {UserService} from "../services/user.service";
-import {User} from "../interfaces";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {UserService} from "../../services/user.service";
+import {User} from "../../interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";

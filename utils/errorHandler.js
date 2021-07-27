@@ -4,3 +4,10 @@ module.exports = (res, error) => {
         message: error.message ? error.message : error
     })
 }
+
+
+/*
+module.isMinLengthValid = (str, len) => {
+    return str && str.length => len
+}
+*/
