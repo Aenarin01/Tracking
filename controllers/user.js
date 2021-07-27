@@ -6,25 +6,38 @@ const jwt = require('jsonwebtoken')
 const errorHandler = require('../utils/errorHandler')
 
 
-module.exports.create = (req, res) => {
-    const salt = bcrypt.genSaltSync(10);
-    const password = req.body.password
-    const user = {
-        name: req.body.name,
-        email: req.body.email,
-        password: bcrypt.hashSync(password,salt),
-        role: req.body.role || 'basic'
-    };
-    User.create(user)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the User."
-            });
-        });
+module.exports.create = async (req, res) => {
+    try {
+        const candidate = await User.findOne({where: {email: req.body.email}})
+        if (candidate) {
+            res.status(409).json({
+                message: 'Такой email уже занят. Попробуйте другой.'
+            })
+        }else{
+            const salt = bcrypt.genSaltSync(10);
+            const password = req.body.password
+            const user = {
+                name: req.body.name,
+                email: req.body.email,
+                password: bcrypt.hashSync(password,salt),
+                role: req.body.role || 'basic'
+            };
+            User.create(user)
+                .then(data => {
+                    res.send(data);
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                            err.message || "Some error occurred while creating the User."
+                    });
+                });
+        }
+    }catch (e) {
+        errorHandler(res, e)
+    }
+
+
 };
 
 module.exports.findAll = async (req, res) => {

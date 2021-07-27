@@ -6,10 +6,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         email: {
             type: Sequelize.STRING,
+            unique: true,
             allowNull: false
         },
         password: {
             type: Sequelize.STRING,
+            defaultValue: '123456',
             allowNull: false
         },
         role: {
