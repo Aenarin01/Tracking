@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {NgForm} from "@angular/forms";
+import { cloneDeep } from 'lodash';
 
 
 @Component({
@@ -17,13 +18,21 @@ import {NgForm} from "@angular/forms";
 
 export class UsersDisplayComponent implements OnInit, AfterViewInit {
 
-  currentUser: User;
+  tmpUser: User;
   users: User[] = []
-  dataSource!: MatTableDataSource<User>;
+  dataSource: MatTableDataSource<User> =new MatTableDataSource<User>([]);
   displayedColumns = ['_id', 'name', 'role', 'email', 'actions'];
   displayedRoles = ['basic', 'supervisor', 'admin', 'user'];
 
   isEditMode: boolean = false
+
+  user = {
+    name: '',
+    email: '',
+    password: '',
+    role: ''
+  };
+  submitted = false
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -43,7 +52,7 @@ export class UsersDisplayComponent implements OnInit, AfterViewInit {
     this.userService.getAll()
       .subscribe(
         data => {
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.data = data;
         },
         error => {
           console.log(error);
@@ -56,9 +65,6 @@ export class UsersDisplayComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort
   }
 
-  ChangeMode() {
-    this.isEditMode = !this.isEditMode
-  }
 
   applyFilter($event: KeyboardEvent) {
     // @ts-ignore
@@ -70,24 +76,57 @@ export class UsersDisplayComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addNew() {
-
+  saveUser(): void {
+    this.userService.create(this.user).subscribe((response: any) => {
+      this.dataSource.data.push({ ...response })
+      this.dataSource.data = this.dataSource.data.map(o => {
+        return o;
+      })
+    });
+    this.submitted = false;
+    this.user = {
+      name: '',
+      email: '',
+      password: '',
+      role: ''
+    };
   }
 
-  deleteItem(user: User) {
+  deleteItem(id:number) {
+    this.userService.delete(id).subscribe((response: any) => {
+      this.dataSource.data = this.dataSource.data.filter((o: User) => {
+        return o.id !== id ? o : false;
+      })
 
+      console.log(this.dataSource.data);
+    });
   }
-
   editUser(user: User) {
+    this.tmpUser = cloneDeep(user);
+    this.isEditMode = true;
+  }
 
+  cancelEdit(user: User) {
+    this.isEditMode = false;
+    user = cloneDeep(this.tmpUser)
+  }
+
+  updateUser(user:User) {
+    this.userService.update(this.tmpUser).subscribe((response: any) => {
+
+      this.dataSource.data = this.dataSource.data.map((o: User) => {
+        if (o.id === response.id) {
+          o = response;
+        }
+        return o;
+      })
+      this.cancelEdit(user)
+
+    });
   }
 
   onSubmit() {
-
-  }
-
-  cancelEdit() {
-
-  }
+        this.saveUser();
+    }
 }
 

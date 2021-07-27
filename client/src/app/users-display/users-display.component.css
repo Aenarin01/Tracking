@@ -3,6 +3,15 @@
   margin-top: 50px;
 }
 
+.table-responsive{
+  margin-bottom: 50px;
+}
+
+.add-btn{
+  width: 50px;
+  float: right;
+}
+
 .container {
   display: flex;
   flex-direction: column;

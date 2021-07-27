@@ -19,16 +19,16 @@ export class UserService {
     return this.http.get(`api/user/${id}`);
   }
 
-  create(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    return this.http.post('api/user', data);
+  create(user:User): Observable<any> {
+    return this.http.post('api/user', user);
   }
 
   update(user:User): Observable<any> {
     return this.http.put(`api/user/${user.id}`, user);
   }
 
-  delete(user:User): Observable<any> {
-    return this.http.delete(`api/user/${user.id}`);
+  delete(id:number): Observable<any> {
+    return this.http.delete(`api/user/${id}`);
   }
 }
 
