@@ -35,9 +35,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params: Params) =>{
 
       if(params['accessDenied']){
-       this.router.navigate(['/login'])
+       this.router.navigate(['/auth/login'])
+        alert("Пожалуйста авторизируйтесь в сестеме")
       }else if(params['sessionFailed']){
-        this.router.navigate(['/login'])
+        this.router.navigate(['/auth/login'])
       }
     })
 

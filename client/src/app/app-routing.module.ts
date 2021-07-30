@@ -1,9 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {UsersDisplayComponent} from "./adminer/users-display/users-display.component";
-import {HomeComponent} from "./home/home.component";
 
-import {SiteLayoutComponent} from "./layouts/site-layout/site-layout.component";
 import {AuthGuard} from "./services/auth.guard";
 
 const routes: Routes = [
@@ -13,17 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'adminer', loadChildren: () => import('./adminer/adminer.module').then(m => m.AdminerModule),
+    canActivate: [AuthGuard]
   },
-
-
-  // {path: 'adminer', loadChildren: () => import('./adminer/adminer.module').then(m => m.AdminerModule),},
-  // {
-  //   path: '', component: SiteLayoutComponent, canActivate:[AuthGuard], children: [
-  //     {path: '', redirectTo: '/main', pathMatch: 'full'},
-  //     {path: 'main', component: HomeComponent},
-  //     {path: 'users', component: UsersDisplayComponent},
-  //   ]
-  // },
+  {
+    path: 'main', loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+  },
 ];
 
 @NgModule({

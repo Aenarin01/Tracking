@@ -8,13 +8,13 @@ services:
 #      POSTGRES_USER: user1
 #      POSTGRES_PASSWORD: changeme
 #      POSTGRES_DB: tododb
-#  admin:
-#    image: adminer
-#    restart: always
-#    depends_on:
-#      - db
-#    ports:
-#      - 8080:8080
+  admin:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
   mysql-tracking:
       image: mysql
       ports:

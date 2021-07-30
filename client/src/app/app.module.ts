@@ -8,7 +8,6 @@ import {MatSliderModule} from "@angular/material/slider";
 import { AppRoutingModule } from './app-routing.module';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
-import { HomeComponent } from './home/home.component';
 import {MatTableModule} from '@angular/material/table';
 import {AngularMaterialModule} from "./material.module";
 import {MatCardModule} from "@angular/material/card";
@@ -20,7 +19,6 @@ import {MatSortModule} from "@angular/material/sort";
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     SiteLayoutComponent
   ],
     imports: [
