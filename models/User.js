@@ -1,5 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("user", {
+
+    const User =  sequelize.define("User", {
         name: {
             type: Sequelize.STRING,
             allowNull: false
@@ -17,12 +18,12 @@ module.exports = (sequelize, Sequelize) => {
         role: {
             type: Sequelize.STRING,
             defaultValue: 'basic',
-            enum: ["basic", "supervisor","admin"]
+            enum: ["basic", "supervisor", "admin"]
         },
         accessToken: {
             type: Sequelize.STRING
         }
-    },{ timestamps: false });
+    }, {timestamps: false})
 
+    return User
 };
-

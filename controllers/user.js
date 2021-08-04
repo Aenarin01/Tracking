@@ -36,8 +36,6 @@ module.exports.create = async (req, res) => {
     }catch (e) {
         errorHandler(res, e)
     }
-
-
 };
 
 module.exports.findAll = async (req, res) => {
@@ -97,7 +95,7 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete User with id=${id}. Maybe Tutorial was not found!`
+                    message: `Cannot delete User with id=${id}. Maybe Event was not found!`
                 });
             }
         })

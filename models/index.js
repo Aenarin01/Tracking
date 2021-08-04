@@ -7,7 +7,7 @@ const sequelize = new Sequelize(keys.DB, keys.USER, keys.PASSWORD, {
     port: keys.PORT,
     dialect: keys.dialect,
     operatorsAliases: false,
-
+    logging: false,
     pool: {
         max: keys.pool.max,
         min: keys.pool.min,
@@ -21,6 +21,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("./user.js")(sequelize, Sequelize);
+db.events = require("../models/events.js")(sequelize, Sequelize);
+db.user = require("../models/User.js")(sequelize, Sequelize);
+
+
 
 module.exports = db;

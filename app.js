@@ -22,9 +22,5 @@ app.use('/api/auth', authRoutes)
 db.sequelize.sync();
 app.listen(3020, () => console.log(`Server is working on ${3020}`));
 
-app.get("/hello", function (request, response) {
-
-    response.send({result: 'Hello'});
-});
 
 
