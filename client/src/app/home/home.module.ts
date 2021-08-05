@@ -6,6 +6,7 @@ import {FullCalendarModule} from '@fullcalendar/angular'; // must go before plug
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import {AddEventComponent} from './add-event/add-event.component';
+import {FormsModule} from "@angular/forms";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -21,6 +22,7 @@ FullCalendarModule.registerPlugins([
     CommonModule,
     HomeRoutingModule,
     FullCalendarModule,
+    FormsModule,
   ]
 })
 export class HomeModule {

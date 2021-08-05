@@ -54,7 +54,7 @@ module.exports.create = async function(req, res) {
 
 module.exports.remove = (req, res) => {
     const id = req.params.id;
-    User.destroy({
+    Event.destroy({
         where: {id: id}
     })
         .then(num => {

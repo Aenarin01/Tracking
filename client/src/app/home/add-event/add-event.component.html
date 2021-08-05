@@ -1,1 +1,32 @@
-<p>add-event works!</p>
+<div class="center">
+  <div class="col-md-6">
+    <form>
+      <div class="form-group row">
+        <label  class="label col-sm-3 col-form-label">Title</label>
+        <div class="col-sm-9">
+          <input type="email" nbInput fullWidth id="title" placeholder="Title" [(ngModel)]="event.title"
+                 [ngModelOptions]="{standalone: true}" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-3 col-form-label">Title</label>
+        <div class="col-sm-9">
+          <input type="email" nbInput fullWidth id="description" placeholder="Description" [(ngModel)]="event.description"
+                 [ngModelOptions]="{standalone: true}" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-3 col-form-label">Date</label>
+        <div class="col-sm-9">
+          <input type="date" nbInput fullWidth id="date" placeholder="Password" [(ngModel)]="event.start"
+                 [ngModelOptions]="{standalone: true}" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" nbButton status="primary" (click)="saveEvent()">Add Event</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

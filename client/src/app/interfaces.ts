@@ -7,9 +7,9 @@ export interface User {
 }
 
 export class Events {
-  id: string;
+  id?: string;
   title: string;
-  description: string;
+  description?: string;
   start: string;
-  end: string;
+  end?: string;
 }
