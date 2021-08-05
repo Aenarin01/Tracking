@@ -16,6 +16,13 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
       type: Sequelize.STRING
     },
+    user: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    }
   }, {timestamps: false})
 
   return Event

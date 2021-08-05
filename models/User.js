@@ -19,11 +19,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             defaultValue: 'basic',
             enum: ["basic", "supervisor", "admin"]
-        },
-        accessToken: {
-            type: Sequelize.STRING
         }
     }, {timestamps: false})
+
+    User.associate = function(models) {
+
+    };
 
     return User
 };

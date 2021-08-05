@@ -28,6 +28,7 @@
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.22.4",
+    "sweetalert2": "^11.1.2",
     "typeorm": "^0.2.34",
     "umzug": "^2.3.0"
   },

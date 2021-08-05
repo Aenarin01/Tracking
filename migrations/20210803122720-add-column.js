@@ -2,7 +2,7 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.sequelize.transaction(t => {
             return Promise.all([
-                queryInterface.addColumn('Events', 'userId', {
+                queryInterface.addColumn('Events', 'user', {
                     type: Sequelize.INTEGER,
                     references: {
                         model: 'Users',
@@ -15,7 +15,7 @@ module.exports = {
     down: (queryInterface, Sequelize) => {
         return queryInterface.sequelize.transaction(t => {
             return Promise.all([
-                queryInterface.removeColumn('Events', 'userId', {transaction: t})
+                queryInterface.removeColumn('Events', 'user', {transaction: t})
             ]);
         });
     }

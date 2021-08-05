@@ -13,7 +13,7 @@ module.exports = passport => {
     passport.use(
         new JwtStrategy(options, async (payload, done) => {
             try {
-                const user = await User.findOne({id: payload._id})
+                const user = await User.findByPk(payload.id)
                 if (user) {
                     done(null, user)
                 } else {

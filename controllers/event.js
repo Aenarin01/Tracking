@@ -1,15 +1,17 @@
 const db = require("../models");
 const Event = db.events;
+const User = db.user
 const Op = db.Sequelize.Op;
 const errorHandler = require('../utils/errorHandler')
 const {where} = require("sequelize");
 const bcrypt = require("bcrypt");
 
 
+
 module.exports.getAll = async function(req, res) {
     try {
         const events = await Event.findAll({
-            where: {userId: req.user.id}
+            where: {user: req.user.id}
         })
         res.status(200).json(events)
     } catch (e) {
@@ -31,11 +33,12 @@ module.exports.findOneEvent = async function (req, res) {
 
 
 module.exports.create = async function(req, res) {
+
     const event = {
         title: req.body.title,
         description: req.body.description,
         start: req.body.start,
-        userId: req.user.id,
+        user: req.user.id
     };
     Event.create(event)
         .then(data => {

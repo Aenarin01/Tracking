@@ -18,12 +18,17 @@ module.exports.login = async function (req, res) {
         if (passwordResult) {
             const token = jwt.sign({
                 email: candidate.email,
-                id: candidate._id,
+                id: candidate.id,
                 role: candidate.role
             }, keys.jwt, {expiresIn: 60 * 60})
-
             res.status(200).json({
-                token: `Bearer ${token}`
+                token: `Bearer ${token}`,
+                user: {
+                    id: candidate.id,
+                    email: candidate.email,
+                    name: candidate.name,
+                    role: candidate.role
+                }
             })
         } else {
             // Пароли не совпали
