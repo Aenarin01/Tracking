@@ -9,6 +9,9 @@ router.get('/', passport.authenticate('jwt', {session: false}), controller.getAl
 
 router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.remove)
 
+router.put("/:id", passport.authenticate('jwt', {session: false}), controller.update);
+
+
 router.get('/:id', passport.authenticate('jwt', {session: false}), controller.findOneEvent)
 
 

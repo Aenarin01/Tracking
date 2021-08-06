@@ -42,6 +42,7 @@ module.exports.create = async function(req, res) {
     };
     Event.create(event)
         .then(data => {
+            console.log(data)
             res.send(data);
         })
         .catch(err => {
@@ -50,6 +51,26 @@ module.exports.create = async function(req, res) {
                     err.message || "Some error occurred while creating the Event."
             });
         });
+}
+
+module.exports.update = async function (req, res) {
+    const id = req.params.id;
+    try {
+        const event = await Event.update({
+            title: req.body.title,
+            description: req.body.description,
+            start: req.body.start
+        }, {
+            where: {id: id}
+        })
+        await Event.findByPk(req.params.id)
+            .then(data=>{
+                res.send(data)
+            })
+        res.status(200)
+    } catch (e) {
+        errorHandler(res, e)
+    }
 }
 
 module.exports.remove = (req, res) => {

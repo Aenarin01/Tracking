@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
-import {Events, User} from "../interfaces";
+import {Event, User} from "../interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +15,20 @@ export class EventCalendarService {
     public router: Router
   ) { }
 
-  getAll(): Observable<Events[]> {
-    return this.http.get<Events[]>('api/event');
+  getAll(): Observable<Event[]> {
+    return this.http.get<Event[]>('api/event');
   }
 
   get(id: string | null): Observable<any> {
     return this.http.get(`api/event/${id}`);
   }
 
-  create(event:Events): Observable<any> {
+  create(event:Event): Observable<any> {
     return this.http.post('api/event', event);
+  }
+
+  update(event:Event): Observable<any> {
+    return this.http.put(`api/event/${event.id}`, event);
   }
 
   remove(id:number): Observable<any> {

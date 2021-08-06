@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { EventCalendarService } from '../../services/event-calendar.service';
+import { EventCalendarService } from '../../../services/event-calendar.service';
+import {Event} from "../../../interfaces";
 
 @Component({
-  selector: 'app-add-event',
-  templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.css']
+  selector: 'app-interaction',
+  templateUrl: './interaction.component.html',
+  styleUrls: ['./interaction.component.css']
 })
-export class AddEventComponent implements OnInit {
+export class InteractionComponent implements OnInit {
+
+  @Output() addEvent: EventEmitter<Event> = new EventEmitter<Event>();
 
   event = {
+    id: '',
     title: '',
     description: '',
     start: '',
@@ -20,8 +24,7 @@ export class AddEventComponent implements OnInit {
   error: any;
   constructor(
     public http: HttpClient,
-    private eventService: EventCalendarService,
-    private router: Router
+    private eventService: EventCalendarService
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,8 @@ export class AddEventComponent implements OnInit {
     this.eventService.create(event)
       .subscribe(
         (response: any) => {
+          this.event.id = response.id
+          this.addEvent.emit(this.event)
           if (response.type === 'success') {
             Swal.fire({
               position: 'center',
@@ -44,7 +49,6 @@ export class AddEventComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             });
-            this.router.navigate(['/main']);
           }
         },
         err => {

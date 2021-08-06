@@ -6,7 +6,7 @@ export interface User {
   role: string
 }
 
-export class Events {
+export class Event {
   id?: string;
   title: string;
   description?: string;

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home.component";
-import {AddEventComponent} from "./add-event/add-event.component";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'add-event', component: AddEventComponent}
+  {path: '', component: HomeComponent,  children: [
+      { path: 'eventsShedule', loadChildren: () => import('./events-shedule/events-shedule.module').then(m => m.EventsSheduleModule) },
+    ]
+  },
 ];
 
 @NgModule({
