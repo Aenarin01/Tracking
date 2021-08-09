@@ -17,9 +17,16 @@
         </div>
       </div>
       <div class="form-group row">
-        <label  class="label col-sm-3 col-form-label">Date</label>
+        <label  class="label col-sm-3 col-form-label">Start</label>
         <div class="col-sm-9">
-          <input type="date" nbInput fullWidth id="date" placeholder="Password" [(ngModel)]="event.start"
+          <input type="date" nbInput fullWidth id="start" [(ngModel)]="event.start"
+                 [ngModelOptions]="{standalone: true}" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-3 col-form-label">End</label>
+        <div class="col-sm-9">
+          <input type="date" nbInput fullWidth id="end" [(ngModel)]="event.end"
                  [ngModelOptions]="{standalone: true}" required>
         </div>
       </div>

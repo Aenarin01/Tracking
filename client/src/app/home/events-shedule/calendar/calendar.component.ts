@@ -13,35 +13,37 @@ import {EventCalendarService} from "../../../services/event-calendar.service";
 })
 
 
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements AfterViewInit {
 
   @ViewChild('infobox', {static: false}) calendarRef: ElementRef;
+   calendarVisible: boolean = true;
 
   @Input()
 
   set events(value) {
     this._events = value;
-    console.log(value)
 
-   this.calendarOptions = {
+    this.calendarOptions = {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
+      firstDay: 1,
       initialView: 'dayGridMonth',
-      selectable: true,
+      weekends: true,
       editable: true,
-      select: this.handleDateClick.bind(this),
+      selectable: true,
+      selectMirror: true,
+      dayMaxEvents: true,
+      select: this.handleDateSelect.bind(this),
       events: value,
-      eventClick: this.eventClick.bind(this)
+      eventClick: this.handleEventClick.bind(this),
     }
     if (this.calendar) {
       this.calendar.addEvent(value)
-      console.log(this.calendar)
       this.calendar.render()
     }
-
   }
 
   get events() {
@@ -59,47 +61,32 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  handleDateClick(arg: any) {
+  handleDateSelect(selectInfo: DateSelectArg) {
+    const title = prompt('Please enter a new title for your event');
+    const calendarApi = selectInfo.view.calendar;
 
+    calendarApi.unselect(); // clear date selection
+
+    if (title) {
+      calendarApi.addEvent({
+        id: '1',
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+      });
+    }
   }
 
-  onSelectx(event: any) {
+  handleEventClick(clickInfo: EventClickArg) {
+    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
 
-  }
-
-  ngOnInit() {
-
+    }
   }
 
   deleteEvent(id: number) {
-    this.eventService.remove(id).subscribe((data: any) => {
-    });
-  }
-
-  private eventClick(evetData: any) {
-    const event_id = evetData.event._def.extendedProps._id;
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      timer: 30000,
-    }).then((result) => {
-      if (result.value) {
-        this.deleteEvent(event_id);
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        );
-      }
-
-    }).catch(() => {
-      Swal.fire('Failed!', 'There was something went wrong.');
-    });
+    this.eventService.remove(id).subscribe((data: any) => {});
   }
 
   ngAfterViewInit(): void {
@@ -113,9 +100,9 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         initialView: 'dayGridMonth',
         selectable: true,
         editable: true,
-        select: this.handleDateClick.bind(this),
+        select: this.handleDateSelect.bind(this),
         events: this.events,
-        eventClick: this.eventClick.bind(this)
+        eventClick: this.handleEventClick.bind(this)
       }
     )
   }

@@ -2,6 +2,7 @@
 
 <div >
   <hr>
-  <full-calendar #infobox  [options]="calendarOptions"> </full-calendar>
-
+  <full-calendar #infobox
+                 *ngIf='calendarVisible'
+                 [options]="calendarOptions"> </full-calendar>
 </div>

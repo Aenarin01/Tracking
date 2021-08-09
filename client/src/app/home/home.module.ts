@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {AngularMaterialModule} from "../material.module";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {AngularMaterialModule} from "../material.module";
     MatCardModule,
     MatSidenavModule,
     AngularMaterialModule,
+    MatMenuModule,
   ]
 })
 export class HomeModule {

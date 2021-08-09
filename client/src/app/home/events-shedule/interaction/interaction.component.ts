@@ -36,29 +36,14 @@ export class InteractionComponent implements OnInit {
       start: this.event.start,
       end: this.event.end
     };
+    console.log(event)
     this.eventService.create(event)
       .subscribe(
         (response: any) => {
           this.event.id = response.id
           this.addEvent.emit(this.event)
-          if (response.type === 'success') {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Your Event has been added successfully',
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }
         },
         err => {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Something went wrong',
-            showConfirmButton: false,
-            timer: 1500
-          });
           this.event.title = '';
           this.event.description = '';
           this.event.start = '';

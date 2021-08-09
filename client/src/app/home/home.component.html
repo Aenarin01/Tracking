@@ -1,7 +1,11 @@
 <mat-toolbar color="primary" class="header">
-  <div>User Records</div>
-  <button type="button" mat-button class="btn-cal" routerLink="/main/eventsShedule">Calendar</button>
-
+  <div routerLink="/main">User Records</div>
+  <button mat-button [matMenuTriggerFor]="aboveMenu"  class="btn-cal-events">Events Schedule</button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <button mat-menu-item type="button"  class="btn-cal" routerLink="/main/eventsShedule">Calendar</button>
+    <button mat-menu-item type="button"  class="btn-cal" routerLink="/main/map">Map</button>
+    <button mat-menu-item type="button"  class="btn-cal" routerLink="/main">Main</button>
+  </mat-menu>
   <button type="submit" mat-button class="btn-logout" (click)="signOut($event)">LogOut</button>
 
 </mat-toolbar>

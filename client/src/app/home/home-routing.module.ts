@@ -5,6 +5,7 @@ import {HomeComponent} from "./home.component";
 const routes: Routes = [
   {path: '', component: HomeComponent,  children: [
       { path: 'eventsShedule', loadChildren: () => import('./events-shedule/events-shedule.module').then(m => m.EventsSheduleModule) },
+      { path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule) },
     ]
   },
 ];
