@@ -1,7 +1,9 @@
 .btn-logout {
   text-align: right;
   width: 120px;
-  float: right;
+  position: absolute;
+  right: 30px;
+  font-size: 18px;
 }
 
 .main{
@@ -17,6 +19,11 @@
 
 .btn-cal-events{
   font-size: 18px;
-  float: right;
   width: auto;
+  position: absolute;
+  right: 120px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
+
+

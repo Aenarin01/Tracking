@@ -38,6 +38,7 @@ module.exports.create = async function(req, res) {
         title: req.body.title,
         description: req.body.description,
         start: req.body.start,
+        end: req.body.end,
         user: req.user.id
     };
     Event.create(event)
@@ -59,7 +60,8 @@ module.exports.update = async function (req, res) {
         const event = await Event.update({
             title: req.body.title,
             description: req.body.description,
-            start: req.body.start
+            start: req.body.start,
+            end: req.body.end,
         }, {
             where: {id: id}
         })
