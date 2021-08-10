@@ -7,6 +7,8 @@ router.post('/', passport.authenticate('jwt', {session: false}), controller.crea
 
 router.get('/', passport.authenticate('jwt', {session: false}), controller.getAll)
 
+router.get('/all', passport.authenticate('jwt', {session: false}), controller.getEvents)
+
 router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.remove)
 
 router.put("/:id", passport.authenticate('jwt', {session: false}), controller.update);

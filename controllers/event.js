@@ -6,6 +6,14 @@ const errorHandler = require('../utils/errorHandler')
 const {where} = require("sequelize");
 const bcrypt = require("bcrypt");
 
+module.exports.getEvents = async function(req, res) {
+    try {
+        const events = await Event.findAll({})
+        res.status(200).json(events)
+    } catch (e) {
+        errorHandler(res, e)
+    }
+}
 
 
 module.exports.getAll = async function(req, res) {

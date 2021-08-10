@@ -24,6 +24,7 @@ db.sequelize = sequelize;
 db.events = require("../models/events.js")(sequelize, Sequelize);
 db.user = require("../models/User.js")(sequelize, Sequelize);
 
+db.user.hasMany(db.events)
 
 
 module.exports = db;

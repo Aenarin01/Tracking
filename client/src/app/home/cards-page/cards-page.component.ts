@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User, Event} from "../../interfaces";
+import {EventCalendarService} from "../../services/event-calendar.service";
 
 @Component({
   selector: 'app-cards-page',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardsPageComponent implements OnInit {
 
-  constructor() { }
+  tmpUser: User;
+  events: Event [] = []
+
+  constructor(private eventService: EventCalendarService) { }
 
   ngOnInit(): void {
+    this.getEvents()
+  }
+
+  getEvents(){
+    this.eventService.getAllEvents()
   }
 
 }

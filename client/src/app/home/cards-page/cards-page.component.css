@@ -7,7 +7,30 @@
   background-size: cover;
 }
 
-.card-actions{
+.card-actions {
   display: block;
   position: center;
 }
+
+.content {
+  width: 900px;
+  justify-content: center;
+  margin-left: 20%;
+}
+
+.li-cards {
+  width: 300px;
+  margin-top: auto;
+}
+
+.ul-card {
+  display: grid;
+  grid-auto-rows: 280px;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+  list-style-type: none !important;
+  margin-top: 12px;
+  padding-left: 0;
+  align-content: center;
+}
+

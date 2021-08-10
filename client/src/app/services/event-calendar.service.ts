@@ -19,6 +19,10 @@ export class EventCalendarService {
     return this.http.get<Event[]>('api/event');
   }
 
+  getAllEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>('api/event/all');
+  }
+
   get(id: string | null): Observable<any> {
     return this.http.get(`api/event/${id}`);
   }

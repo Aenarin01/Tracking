@@ -36,7 +36,6 @@ export class InteractionComponent implements OnInit {
       start: this.event.start,
       end: this.event.end
     };
-    console.log(event)
     this.eventService.create(event)
       .subscribe(
         (response: any) => {
