@@ -12,4 +12,5 @@ export class Event {
   description?: string;
   start: string;
   end: string;
+  imageSrc?: string
 }

@@ -19,7 +19,8 @@ export class InteractionComponent implements OnInit {
     title: '',
     description: '',
     start: '',
-    end: ''
+    end: '',
+    imageSrc: ''
   };
   error: any;
   constructor(

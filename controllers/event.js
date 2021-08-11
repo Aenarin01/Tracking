@@ -47,6 +47,7 @@ module.exports.create = async function(req, res) {
         description: req.body.description,
         start: req.body.start,
         end: req.body.end,
+        imageSrc: req.file ? req.file.path : '',
         user: req.user.id
     };
     Event.create(event)
@@ -70,6 +71,7 @@ module.exports.update = async function (req, res) {
             description: req.body.description,
             start: req.body.start,
             end: req.body.end,
+            imageSrc: req.file ? req.file.path : ''
         }, {
             where: {id: id}
         })
