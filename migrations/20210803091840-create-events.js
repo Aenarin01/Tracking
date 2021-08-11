@@ -23,18 +23,6 @@ module.exports = {
       end: {
         allowNull: true,
         type: Sequelize.STRING
-      },
-      imageSrc: {
-        allowNull: true,
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      user: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
       }
     },{ timestamps: false });
   },
