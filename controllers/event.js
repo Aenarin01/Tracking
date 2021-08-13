@@ -1,10 +1,6 @@
 const db = require("../models");
 const Event = db.events;
-const User = db.user
-const Op = db.Sequelize.Op;
 const errorHandler = require('../utils/errorHandler')
-const {where} = require("sequelize");
-const bcrypt = require("bcrypt");
 
 module.exports.getEvents = async function(req, res) {
     try {
@@ -14,7 +10,6 @@ module.exports.getEvents = async function(req, res) {
         errorHandler(res, e)
     }
 }
-
 
 module.exports.getAll = async function(req, res) {
     try {
@@ -29,7 +24,7 @@ module.exports.getAll = async function(req, res) {
 
 module.exports.findOneEvent = async function (req, res) {
     try {
-        const event = await Event.findByPk(req.params.id)
+         await Event.findByPk(req.params.id)
             .then(data => {
                 res.send(data)
             })
@@ -41,7 +36,6 @@ module.exports.findOneEvent = async function (req, res) {
 
 
 module.exports.create = async function(req, res) {
-
     const event = {
         title: req.body.title,
         description: req.body.description,
@@ -50,6 +44,7 @@ module.exports.create = async function(req, res) {
         imageSrc: req.file ? req.file.path : '',
         user: req.user.id
     };
+
     Event.create(event)
         .then(data => {
             console.log(data)

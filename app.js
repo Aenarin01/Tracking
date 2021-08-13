@@ -9,7 +9,7 @@ const eventRoutes = require('./routes/event')
 const passport = require("passport");
 
 app.use(require('morgan')('dev'))
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads',express.static('uploads'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(require('cors')())
@@ -17,9 +17,11 @@ app.use(require('cors')())
 app.use(passport.initialize())
 require('./middleware/passport')(passport)
 
+
 require("./routes/user")(app);
 app.use('/api/auth', authRoutes)
 app.use('/api/event', eventRoutes)
+
 
 db.sequelize.sync();
 app.listen(3020, () => console.log(`Server is working on ${3020}`));
