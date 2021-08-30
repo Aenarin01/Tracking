@@ -14,6 +14,7 @@ export class AdminerComponent implements OnInit {
     {url: '/add', name: 'Add'},
     {url: '/users', name: 'Users'}
   ];
+
   constructor(private auth: AuthService,
               private router: Router) {
   }

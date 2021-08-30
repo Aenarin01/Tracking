@@ -1,5 +1,6 @@
-const db = require("../models");
+const db = require('../models');
 const Event = db.events;
+const minioService = require('../utils/minioService')
 const errorHandler = require('../utils/errorHandler')
 
 module.exports.getEvents = async function(req, res) {
@@ -26,6 +27,7 @@ module.exports.findOneEvent = async function (req, res) {
     try {
          await Event.findByPk(req.params.id)
             .then(data => {
+                //todo: find file from minio
                 res.send(data)
             })
         res.status(200)
@@ -36,18 +38,26 @@ module.exports.findOneEvent = async function (req, res) {
 
 
 module.exports.create = async function(req, res) {
+
+    /*todo: 1)add validation
+    *       2)save file to minio
+    *       3)const filename = minio.filename */
+
+    // minioService.minioClient.putObject("images", req.file.originalname, req.file.buffer, function(error, etag) {
+    //     if(error) {
+    //         return console.log(error);
+    //     }
+    // });
     const event = {
         title: req.body.title,
         description: req.body.description,
         start: req.body.start,
         end: req.body.end,
-        imageSrc: req.file ? req.file.path : '',
+        imageSrc: req.file ? req.file.path : '', //originalNmae
         user: req.user.id
     };
-
     Event.create(event)
         .then(data => {
-            console.log(data)
             res.send(data);
         })
         .catch(err => {

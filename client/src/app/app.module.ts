@@ -11,32 +11,36 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from '@angular/material/table';
 import {AngularMaterialModule} from "./material.module";
 import {MatCardModule} from "@angular/material/card";
-import {SiteLayoutComponent} from './layouts/site-layout/site-layout.component';
+import {SiteLayoutComponent} from './shared/layouts/site-layout/site-layout.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TokenInterceptor} from "./services/token.interceptor";
 import {MatSortModule} from "@angular/material/sort";
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     AppComponent,
-    SiteLayoutComponent
+    SiteLayoutComponent,
+    LoaderComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    AngularMaterialModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatSortModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatSliderModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        AngularMaterialModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatSortModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
   ],

@@ -29,5 +29,4 @@ function checkFileType(file, cb){
         cb('Error: Images Only!');
     }
 }
-
 module.exports = multer({storage, checkFileType, upload})

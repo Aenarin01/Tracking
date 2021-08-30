@@ -5,9 +5,3 @@ module.exports = (res, error) => {
     })
 }
 
-
-/*
-module.isMinLengthValid = (str, len) => {
-    return str && str.length => len
-}
-*/

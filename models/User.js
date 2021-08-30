@@ -20,6 +20,10 @@ module.exports = (sequelize, Sequelize) => {
             defaultValue: 'basic',
             enum: ["basic", "supervisor", "admin"]
         }
+        // events: {
+        //     type: Sequelize.ARRAY(Sequelize.INTEGER)
+        // }
+
     }, {timestamps: false})
 
     User.associate = function(models) {
